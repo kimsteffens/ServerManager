@@ -5,7 +5,7 @@ A small Python command-line program that simulates the spawning of different ser
 
 **ServerManager.py:**
 
-This file is what is first run. It processes input from the user. It spawns off servers and keeps track of them. It does not keep track of any servers that are spawned by a server: the parent server manages that in Server.py. 
+This file is what is first run. It is the root parent server that manages its child servers. It processes input from the user. It spawns off servers from itself and keeps track of them. It does not keep track of any processes that are spawned by a server: the server manages that in Server.py. 
 
 Commands from the user are not fully processed in this program, but rather are sent to the necessary Server to be dealt with through a shared file. The servers are signaled SIGUSR1 when a command needs to be read. 
 
