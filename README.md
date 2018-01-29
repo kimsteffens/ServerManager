@@ -23,23 +23,23 @@ The only exception is when a server child receives an unusual command that cause
 Each time the shm.txt file is to be read, it gets mmapped. This maps the file to virtual memory so that all readers are kept up to date on what is in the file.
 
 ## User Commands:
-CreateServer minProcs maxProcs ServerName :
+**CreateServer minProcs maxProcs ServerName**
   
 A new child gets forked from ServerManager and execlp’s Server.py with the given command as arguments. The Server sets itself up by reading in the arguments given to it into global variables upon creation. It then spawns minProcs number of children.
 
-AbortServer serverName :
+**AbortServer serverName**
   
 The Server gets notified that it should abort by ServerManager. The parent server then loops through all its children, killing them one by one. It finally then kills itself.
 
-createProcess serverName:
+**createProcess serverName**
   
 ServerManager sends the command. The parent server checks to make sure there are not too many processes before creating a new one. It does this by forking itself, and then killing any children that the parent Server is not a parent of (this makes sure only one process gets created, not several).
 
-abortProcess serverName:
+**abortProcess serverName**
   
 ServerManager sends this command, then the parent Server ensure there are not too few processes before it aborts a process on its list.
 
-displayStatus:
+**displayStatus**
 
 First ServerManager prints out its dictionary of servers spawned (the server names and their pids). Then it informs each parent server to print out its list of each child server spawned.
 
